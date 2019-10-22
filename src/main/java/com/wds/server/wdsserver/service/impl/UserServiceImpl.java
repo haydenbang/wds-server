@@ -30,16 +30,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User userDetail) {
-        User user = userRepository.findById(userDetail.getId()).get();
+        User user = userRepository.findById(userDetail.getIdx()).get();
         user.setName(userDetail.getName());
 
         return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Long userId) throws Exception {
+    public void deleteUser(Long idx) throws Exception {
         try {
-            User user = userRepository.findById(userId).get();
+            User user = userRepository.findById(idx).get();
             userRepository.delete(user);
 
         } catch (Exception e) {

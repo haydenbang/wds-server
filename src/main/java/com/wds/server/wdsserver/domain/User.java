@@ -15,6 +15,10 @@ import java.util.Date;
 public class User {
 
     @Id
+    @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idx;
+
     @Column(name = "_id")
     private String id;
 

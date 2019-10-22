@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/study_db?serverTimezone=UTC&useSSL=false
-    username: root
-    password: a90a1027a
+    url: jdbc:mysql://13.124.207.31:3306/wds?serverTimezone=UTC&useSSL=false
+    username: 'wds'
+    password: '0000'
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

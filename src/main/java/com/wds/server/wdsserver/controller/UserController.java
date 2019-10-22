@@ -37,21 +37,21 @@ public class UserController {
 
     @PostMapping("/users")
     @ApiOperation(value = "사용자 저장", nickname = "사용자 저장", notes = "사용자 정보를 저장한다.")
-    public ResponseEntity<?> addUser(@Valid @RequestBody User user) {
+    public ResponseEntity<?> addUser(@Valid @ModelAttribute User user) {
         return responseType.send(userService.addUser(user));
     }
 
-    @PutMapping("/users/{_id}")
+    @PutMapping("/users/{idx}")
     @ApiOperation(value = "사용자 정보 수정", nickname = "사용자 정보 수정", notes = "사용자 정보를 수정한다.")
-    public ResponseEntity<?> updateUser(@PathVariable("_id") Long userId, @Valid @RequestBody User userDetail) {
-        userDetail.setId(userId);
+    public ResponseEntity<?> updateUser(@PathVariable("idx") Long idx,
+                                        @Valid @ModelAttribute User userDetail) {
         return responseType.send(userService.updateUser(userDetail));
     }
 
-    @DeleteMapping("/users/{_id}")
+    @DeleteMapping("/users/{idx}")
     @ApiOperation(value = "사용자 삭제", nickname = "사용자 삭제", notes = "사용자 정보를 삭제한다.")
-    public ResponseEntity<?> deleteUser(@PathVariable("_id") Long userId) throws Exception {
-        userService.deleteUser(userId);
+    public ResponseEntity<?> deleteUser(@PathVariable("idx") Long idx) throws Exception {
+        userService.deleteUser(idx);
         return responseType.send();
     }
 }
