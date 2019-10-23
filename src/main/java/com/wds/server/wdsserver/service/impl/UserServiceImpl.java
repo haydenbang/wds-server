@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,7 +31,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User userDetail) {
-        User user = userRepository.findById(userDetail.getIdx()).get();
+        User user = new User();
+
+        Optional<User> optionalUser = userRepository.findById(userDetail.getIdx());
+
+        if(optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }
+
         user.setName(userDetail.getName());
 
         return userRepository.save(user);
@@ -39,8 +47,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long idx) throws Exception {
         try {
-            User user = userRepository.findById(idx).get();
-            userRepository.delete(user);
+            Optional<User> optionalUser = userRepository.findById(idx);
+
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+
+                userRepository.delete(user);
+            } else {
+                log.info("존재하지않는 유저입니다.");
+                throw new Exception(); // TODO 400 Error인데, Exception을 던져야하는지?
+            }
 
         } catch (Exception e) {
             log.info("Error");
