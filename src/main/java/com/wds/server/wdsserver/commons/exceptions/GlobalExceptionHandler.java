@@ -81,6 +81,6 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler({RuntimeException.class, Exception.class})
 	public ResponseEntity<?> error500(HttpServletRequest req, Exception e) {
 		log.error(e.toString());
-		return responseType.send(HttpStatus.INTERNAL_SERVER_ERROR, EnumMessage.HTTP_INTERNAL_SERVER_ERROR, null);
+		return responseType.send(HttpStatus.INTERNAL_SERVER_ERROR, EnumMessage.HTTP_SERVER_ERROR, null);
 	}
 }
