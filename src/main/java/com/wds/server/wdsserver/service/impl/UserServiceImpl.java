@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -62,5 +63,21 @@ public class UserServiceImpl implements UserService {
             log.info("Error");
             throw new Exception();
         }
+    }
+
+    @Override
+    public User getUser(Long idx) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(idx);
+
+        User user= new User();
+
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+        } else {
+            log.info("존재하지않는 유저입니다.");
+            throw new Exception(); // TODO 400 Error인데, Exception을 던져야하는지?
+        }
+
+        return user;
     }
 }

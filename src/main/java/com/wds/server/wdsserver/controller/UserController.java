@@ -30,9 +30,15 @@ public class UserController {
 
     @GetMapping("")
     @ApiOperation(value = "전체 사용자 조회", nickname = "전체 사용자 조회", notes = "전체 사용자 정보를 가져온다.")
-    @ApiImplicitParams({@ApiImplicitParam(name="name", value = "이름", required = false, dataType = "string", paramType = "path")})
+    //@ApiImplicitParams({@ApiImplicitParam(name="name", value = "이름", required = false, dataType = "string", paramType = "path")})
     public ResponseEntity<?> getAllUsers() {
         return responseType.send(userService.getAllUsers());
+    }
+
+    @GetMapping("/{idx}")
+    @ApiOperation(value = "사용자 조회", nickname = "사용자 조회", notes = "사용자 정보를 가져온다.")
+    public ResponseEntity<?> getUser(@PathVariable("idx") Long idx) throws Exception {
+        return responseType.send(userService.getUser(idx));
     }
 
     @PostMapping("")
