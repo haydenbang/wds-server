@@ -8,15 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
+// @ControllerAdvice는 모든 @Controller 즉, 전역에서 발생할 수 있는 예외를 잡아 처리
+// @RestControllerAdvice는 @RestController에서 발생한 Exception만 캐치
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
@@ -31,6 +33,7 @@ public class GlobalExceptionHandler {
 	 * @param e
 	 * @return
 	 */
+	// @Controller, @RestController가 적용된 Bean 내에서 (하나의 클래스) 발생하는 예외를 잡아서 하나의 메서드에서 처리
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class, NoHandlerFoundException.class})
 	public ResponseEntity<?> error404(Exception e) {
 		return responseType.send(HttpStatus.NOT_FOUND, EnumMessage.HTTP_NOT_FOUND, null);
