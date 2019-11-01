@@ -65,10 +65,7 @@ public class GlobalExceptionHandler {
 	 * @return
 	 */
 	@ExceptionHandler({
-			MissingServletRequestParameterException.class
-			, MissingServletRequestPartException.class
-			, HttpMediaTypeNotSupportedException.class
-			, MethodArgumentTypeMismatchException.class
+			MissingServletRequestParameterException.class // RequestParam 의 parameter가 넘어오지않을때
 	})
 	public ResponseEntity<?> error400(Exception e) {
 		log.error(e.getMessage());
@@ -82,7 +79,7 @@ public class GlobalExceptionHandler {
 	 * @return
 	 */
 	@ExceptionHandler({RuntimeException.class, Exception.class})
-	public ResponseEntity<?> error500(HttpServletRequest req, Exception e) {
+	public ResponseEntity<?> error500(Exception e) {
 		log.error(e.toString());
 		return responseType.send(HttpStatus.INTERNAL_SERVER_ERROR, EnumMessage.HTTP_SERVER_ERROR, null);
 	}
