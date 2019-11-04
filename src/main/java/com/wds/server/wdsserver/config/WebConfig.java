@@ -35,11 +35,26 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/v1/error/**") /** 추후 삭제 */
                 .excludePathPatterns("/resources/**")
                 .excludePathPatterns("/favicon.ico")
-                 // swagger
+                // swagger
                 .excludePathPatterns("/swagger-ui.html")
                 .excludePathPatterns("/webjars/**")
                 .excludePathPatterns("/swagger-resources/**")
                 .excludePathPatterns("/*/api-docs/**")
                 ;
+    }
+
+    /**
+     * CORS (Cross-Origin Resource Sharing) 설정
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                //.exposedHeaders("header1", "header2")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 }
