@@ -2,19 +2,14 @@ package com.wds.server.wdsserver.controller;
 
 import com.wds.server.wdsserver.commons.ResponseType;
 import com.wds.server.wdsserver.domain.User;
+import com.wds.server.wdsserver.repository.UserRepositoryImpl;
 import com.wds.server.wdsserver.service.UserService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,12 +18,13 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepositoryImpl userRepository;
     private final ResponseType responseType;
 
     @GetMapping("")
     @ApiOperation(value = "전체 사용자 조회", nickname = "전체 사용자 조회", notes = "전체 사용자 정보를 가져온다.")
     public ResponseEntity<?> getAllUsers() {
-        return responseType.send(userService.getAllUsers());
+        return responseType.send(userRepository.getAllUsersOrderByCreatedDate());
     }
 
     @GetMapping("/{idx}")
