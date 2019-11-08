@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 @Api(value = "User", tags = "User")
 public class UserController {
@@ -23,14 +25,8 @@ public class UserController {
     private final UserService userService;
     private final ResponseType responseType;
 
-    public UserController(UserService userService, ResponseType responseType) {
-        this.userService = userService;
-        this.responseType = responseType;
-    }
-
     @GetMapping("")
     @ApiOperation(value = "전체 사용자 조회", nickname = "전체 사용자 조회", notes = "전체 사용자 정보를 가져온다.")
-    //@ApiImplicitParams({@ApiImplicitParam(name="name", value = "이름", required = false, dataType = "string", paramType = "path")})
     public ResponseEntity<?> getAllUsers() {
         return responseType.send(userService.getAllUsers());
     }
