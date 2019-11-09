@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### project ###
+src/main/generated
