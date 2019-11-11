@@ -2,14 +2,12 @@ package com.wds.server.wdsserver.service;
 
 import com.wds.server.wdsserver.WdsServerApplication;
 import com.wds.server.wdsserver.domain.User;
+import com.wds.server.wdsserver.repository.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,25 +19,27 @@ import static org.mockito.Mockito.when;
 public class UserServiceTest {
 
     @Mock
-    private UserService userService;
+    private UserService mockUserService;
+
+    @Mock
+    private User mockUser;
 
     @BeforeAll
     public void setUp() throws Exception {
-        User user = new User();
+        mockUser = new User();
 
-        user.setIdx(1L);
-        user.setAddress("서울");
-        user.setName("이재두");
+        mockUser.setIdx(1L);
+        mockUser.setAddress("서울");
+        mockUser.setName("이재두");
 
-        when(userService.getUser(1L)).thenReturn(user);
+        when(mockUserService.getUser(1L)).thenReturn(mockUser);
 
     }
 
     @Test
-    public void getUserNameByIdx() throws Exception {
-        User userInfo = userService.getUser((long) 1);
+    public void whenUserIdxIs1_thenName이재두() throws Exception {
+        User userInfo = mockUserService.getUser((long) 1);
         assertEquals(userInfo.getName(), "이재두");
-
     }
 
 }

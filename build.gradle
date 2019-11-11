@@ -80,14 +80,11 @@ configurations {
 sourceSets {
     main {
         java {
-            srcDirs = ['src/main/java']
+            srcDirs = ['src/main/java', querydslSrcDir]
         }
     }
 }
 
-clean {
-//    delete querydslSrcDir
-}
 clean {
 //    delete querydslSrcDir
 }
