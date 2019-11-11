@@ -18,13 +18,12 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepositoryImpl userRepository;
     private final ResponseType responseType;
 
     @GetMapping("")
     @ApiOperation(value = "전체 사용자 조회", nickname = "전체 사용자 조회", notes = "전체 사용자 정보를 가져온다.")
     public ResponseEntity<?> getAllUsers() {
-        return responseType.send(userRepository.getAllUsersOrderByCreatedDate());
+        return responseType.send(userService.getAllUsersOrderByCreatedDate());
     }
 
     @GetMapping("/{idx}")
