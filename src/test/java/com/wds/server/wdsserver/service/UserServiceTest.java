@@ -6,20 +6,25 @@ import com.wds.server.wdsserver.repository.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 //@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = WdsServerApplication.class)
+@RestClientTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserServiceTest {
 
-    @Mock
+    @InjectMocks
     private UserService mockUserService;
+
+    @Mock
+    private UserRepository mockUserRepository;
 
     @Mock
     private User mockUser;
@@ -29,11 +34,16 @@ public class UserServiceTest {
         mockUser = new User();
 
         mockUser.setIdx(1L);
-        mockUser.setAddress("서울");
         mockUser.setName("이재두");
 
-        when(mockUserService.getUser(1L)).thenReturn(mockUser);
+        when(mockUserRepository.findById(1L)).thenReturn(java.util.Optional.ofNullable(mockUser));
 
+    }
+
+    @Test
+    public void callAllUserOrderByCreatedDate() throws Exception {
+        mockUserService.getAllUsersOrderByCreatedDate();
+        verify(mockUserRepository, times(1)).getAllUsersOrderByCreatedDate();
     }
 
     @Test
