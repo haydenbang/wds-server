@@ -49,7 +49,8 @@ public class UserServiceTest {
     @Test
     public void whenUserIdxIs1_thenName이재두() throws Exception {
         User userInfo = mockUserService.getUser((long) 1);
-        assertEquals(userInfo.getName(), "이재두");
+        verify(mockUserRepository, times(1)).findById(1L);
+        assertEquals("이재두", userInfo.getName());
     }
 
 }
