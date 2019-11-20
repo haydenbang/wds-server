@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface UserRepositoryCustom {
     List<User> getAllUsersOrderByCreatedDate();
+
+    List<User> lookUpUsers(String filter, String query);
+
 }

@@ -2,7 +2,6 @@ package com.wds.server.wdsserver.controller;
 
 import com.wds.server.wdsserver.commons.ResponseType;
 import com.wds.server.wdsserver.domain.User;
-import com.wds.server.wdsserver.repository.UserRepositoryImpl;
 import com.wds.server.wdsserver.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +23,12 @@ public class UserController {
     @ApiOperation(value = "전체 사용자 조회", nickname = "전체 사용자 조회", notes = "전체 사용자 정보를 가져온다.")
     public ResponseEntity<?> getAllUsers() {
         return responseType.send(userService.getAllUsersOrderByCreatedDate());
+    }
+
+    @GetMapping("/lookup")
+    @ApiOperation(value="사용자 조회", nickname = "사용자 조회", notes = "조건에 맞는 사용자(들)를 가져온다.")
+    public ResponseEntity<?> lookUpUsers(@RequestParam(value = "filter", defaultValue = "All") String filter, @RequestParam("query") String query){
+        return responseType.send(userService.lookUpUsers(filter, query));
     }
 
     @GetMapping("/{idx}")

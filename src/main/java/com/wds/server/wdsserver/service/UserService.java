@@ -24,6 +24,10 @@ public class UserService {
         return userRepository.getAllUsersOrderByCreatedDate();
     }
 
+    public List<User> lookUpUsers(String filter, String query){
+        return userRepository.lookUpUsers(filter, query);
+    }
+
     public User addUser(User user) {
         return userRepository.save(user);
     }

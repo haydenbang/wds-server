@@ -15,7 +15,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -69,16 +68,37 @@ public class UserControllerTest {
     }
 
     @Test
+    public void whenRequestGETBaseURIwithQuery_thenGetOKKStatus() throws Exception {
+        List<User> mockUserList = new ArrayList<>(3);
+
+        User user1 = new User();
+        user1.setId("1111");
+        user1.setName("1111");
+        user1.setTel("010-5555-55555");
+
+        User user2 = new User();
+        user1.setId("1112");
+        user1.setName("1112");
+        user1.setTel("010-5555-55555");
+
+        mockUserList.add(user1);
+        mockUserList.add(user2);
+
+        when(mockUserService.lookUpUsers("", "2")).thenReturn(mockUserList);
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URI+"/lookup")
+                        .param("query","2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    @Test
     public void whenRequestPOSTBaseURI_thenGetOKStatus() throws Exception { // TODO 400 error
-        int idx = 1;
         mockUser = new User();
-        mockUser.setIdx(Integer.toUnsignedLong(idx));
+//        mockUser.setIdx(Integer.toUnsignedLong(idx));
+        mockUser.setIdx(1L);
         mockUser.setId("JKH");
         mockUser.setPass("1234");
         mockUser.setName("지경희");
-        mockUser.setNick_name("갱갱");
-        mockUser.setAddress("서울특별시");
-        mockUser.setTel("010-5175-0553");
 
         ObjectMapper mapper = new ObjectMapper();
         String mockUserJson = mapper.writeValueAsString(mockUser);
