@@ -1,6 +1,8 @@
 package com.wds.server.wdsserver.domain;
 
+import com.wds.server.wdsserver.enums.Authority;
 import io.swagger.annotations.ApiParam;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,8 +16,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-@Getter
-@Setter
+@Data
 public class User {
 
     @Id
@@ -60,6 +61,12 @@ public class User {
     @NotNull
     @ApiParam(defaultValue = "01012341234")
     private String tel;
+
+    @Column(name = "authority", nullable = false)
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @ApiParam(defaultValue = "NORMAL")
+    private Authority authority;
 
     @Column(name = "token")
     @ApiParam(hidden = true)
