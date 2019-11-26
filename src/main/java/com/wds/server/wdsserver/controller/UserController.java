@@ -39,7 +39,7 @@ public class UserController {
 
     @PostMapping("")
     @ApiOperation(value = "사용자 저장", nickname = "사용자 저장", notes = "사용자 정보를 저장한다.")
-    public ResponseEntity<?> addUser(@Valid @ModelAttribute User user) {
+    public ResponseEntity<?> addUser(@Valid @RequestBody User user) {
         return responseType.send(userService.addUser(user));
     }
 

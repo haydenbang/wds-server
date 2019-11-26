@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wds.server.wdsserver.commons.ResponseType;
 import com.wds.server.wdsserver.domain.User;
+import com.wds.server.wdsserver.enums.Authority;
 import com.wds.server.wdsserver.service.UserService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -99,6 +100,10 @@ public class UserControllerTest {
         mockUser.setId("JKH");
         mockUser.setPass("1234");
         mockUser.setName("지경희");
+        mockUser.setNick_name("nickname");
+        mockUser.setAddress("서울");
+        mockUser.setTel("01012344321");
+        mockUser.setAuthority(Authority.OWNER);
 
         ObjectMapper mapper = new ObjectMapper();
         String mockUserJson = mapper.writeValueAsString(mockUser);
