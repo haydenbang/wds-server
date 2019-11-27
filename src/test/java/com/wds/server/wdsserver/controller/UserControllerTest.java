@@ -95,7 +95,6 @@ public class UserControllerTest {
     @Test
     public void whenRequestPOSTBaseURI_thenGetOKStatus() throws Exception { // TODO 400 error
         mockUser = new User();
-//        mockUser.setIdx(Integer.toUnsignedLong(idx));
         mockUser.setIdx(1L);
         mockUser.setId("JKH");
         mockUser.setPass("1234");
@@ -110,7 +109,13 @@ public class UserControllerTest {
 
         when(mockUserService.addUser(Mockito.any(User.class))).thenReturn(mockUser);
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_URI)
-                        .content(mockUserJson)
+                        .param("idx", String.valueOf(mockUser.getIdx()))
+                        .param("pass", mockUser.getPass())
+                        .param("name", mockUser.getName())
+                        .param("nick_name", mockUser.getNick_name())
+                        .param("address", mockUser.getAddress())
+                        .param("tel", mockUser.getTel())
+                        .param("authority", String.valueOf(mockUser.getAuthority()))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(MockMvcResultHandlers.print())
