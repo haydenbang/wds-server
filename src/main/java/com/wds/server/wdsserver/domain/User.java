@@ -49,9 +49,9 @@ public class User {
     @ApiParam(defaultValue = "서울")
     private String address;
 
-    @Column(name = "photo")
-    @Length(max = 255)
-    private String photo;
+    @Column(name = "photo", columnDefinition = "mediumblob")
+    @Lob
+    private Byte[] photo;
 
     @Column(name = "tel", nullable = false)
     @NotNull

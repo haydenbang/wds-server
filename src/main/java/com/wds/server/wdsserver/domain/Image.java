@@ -35,7 +35,7 @@ public class Image {
     @ApiParam(defaultValue = "image")
     private String fileName;
 
-    @Column(name = "photo")
+    @Column(name = "photo", columnDefinition = "mediumblob")
     @NotNull
     @Lob
     private Byte[] photo;
