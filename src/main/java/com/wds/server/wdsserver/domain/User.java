@@ -3,13 +3,9 @@ package com.wds.server.wdsserver.domain;
 import com.wds.server.wdsserver.enums.Authority;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
