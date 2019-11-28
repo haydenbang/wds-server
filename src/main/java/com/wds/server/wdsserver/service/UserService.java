@@ -20,8 +20,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public List<User> getAllUsersOrderByCreatedDate() {
-        return userRepository.getAllUsersOrderByCreatedDate();
+    public List<User> getAllUsersOrderByCreatedDate(String filter, String query) {
+        if (query == null || query.length() == 0) {
+            return userRepository.getAllUsersOrderByCreatedDate();
+        } else {
+            return userRepository.lookUpUsers(filter, query);
+        }
+
     }
 
     public List<User> lookUpUsers(String filter, String query){

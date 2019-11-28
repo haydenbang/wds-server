@@ -22,31 +22,26 @@ public class User {
     private Long idx;
 
     @Column(name = "_id")
-    @ApiParam(defaultValue = "test2019")
     private String id;
 
     @Column(name = "pass", nullable = false)
     @NotNull
     @Length(max = 255)
-    @ApiParam(defaultValue = "test")
     private String pass;
 
     @Column(name = "name", nullable = false)
     @NotNull
     @Length(max = 255)
-    @ApiParam(defaultValue = "김터디")
     private String name;
 
     @Column(name = "nick_name", nullable = false)
     @NotNull
     @Length(max = 255)
-    @ApiParam(defaultValue = "컴맨")
     private String nick_name;
 
     @Column(name = "address", nullable = false)
     @NotNull
     @Length(max = 255)
-    @ApiParam(defaultValue = "서울")
     private String address;
 
     @Column(name = "photo", columnDefinition = "mediumblob")
@@ -55,13 +50,11 @@ public class User {
 
     @Column(name = "tel", nullable = false)
     @NotNull
-    @ApiParam(defaultValue = "01012341234")
     private String tel;
 
     @Column(name = "authority", nullable = false)
     @NotNull
     @Enumerated(EnumType.STRING)
-    @ApiParam(defaultValue = "NORMAL")
     private Authority authority;
 
     @Column(name = "token")
@@ -69,7 +62,6 @@ public class User {
     private String token;
 
     @Column(name = "del_yn")
-    @ApiParam(hidden = true)
     private String del_yn ;
 
     @Column(name = "create_date")

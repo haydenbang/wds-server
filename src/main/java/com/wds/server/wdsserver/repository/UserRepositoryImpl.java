@@ -27,7 +27,9 @@ public class UserRepositoryImpl extends QuerydslRepositorySupport implements Use
     @Override
     public List<User> lookUpUsers(String filter, String query) {    // TODO filter
         return jpaQueryFactory.selectFrom(quser)
-                .where(quser.name.like(query).or(quser.tel.like(query)))
+                .where(quser.name.like("%" + query + "%")
+                .or(quser.tel.like("%" + query + "%")))
+                .orderBy(quser.create_date.desc())
                 .fetch();
     }
 
