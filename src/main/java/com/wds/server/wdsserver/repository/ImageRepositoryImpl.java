@@ -4,9 +4,11 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.wds.server.wdsserver.domain.Image;
 import com.wds.server.wdsserver.domain.QImage;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ImageRepositoryImpl extends QuerydslRepositorySupport implements ImageRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
